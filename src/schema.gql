@@ -1,0 +1,69 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+input AddDevToProjectDto {
+  devId: Float!
+  projectId: Float!
+}
+
+input CreateDeveloperDto {
+  email: String!
+  name: String!
+  roles: [Int!]!
+}
+
+input CreateProjectDto {
+  description: String!
+  name: String!
+  roles: [Float!]! = []
+  status: Status! = Backlog
+}
+
+input CreateRoleDto {
+  name: String!
+}
+
+type Developer {
+  email: String!
+  id: Float!
+  name: String!
+  projects: [Project!]!
+  roles: [Role!]!
+}
+
+type Mutation {
+  addDevToProject(addDevToProjectData: AddDevToProjectDto!): Project!
+  createDeveloper(createDeveloperData: CreateDeveloperDto!): Developer!
+  createProject(createProjectData: CreateProjectDto!): Project!
+  createRole(createRoleData: CreateRoleDto!): Role!
+}
+
+type Project {
+  description: String!
+  developers: [Developer!]!
+  id: Float!
+  name: String!
+  roles: [Role!]!
+  status: Status!
+}
+
+type Query {
+  developers(projectId: Float, roleName: String): [Developer!]!
+  projects(roleName: String, status: Status): [Project!]!
+  roles: [Role!]!
+}
+
+type Role {
+  id: Float!
+  name: String!
+}
+
+enum Status {
+  Backlog
+  Canceled
+  Completed
+  InProgress
+  Paused
+  Planned
+}
